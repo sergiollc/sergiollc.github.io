@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NEXT 1 CAPITAL, LLC — Alternative Investments & Advisory</title>
+
+  <!-- Typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* =========================
+       NEXT 1 CAPITAL — Styles
+       Modern, bright, finance-forward
+       Accent palette inspired by the mockup (orange/charcoal/white)
+       ========================= */
+    :root{
+      --brand:#ff9a16;          /* warm orange accent */
+      --brand-700:#ff7f00;      /* hover/deeper accent */
+      --ink:#111827;            /* near-black text */
+      --muted:#6b7280;          /* secondary text */
+      --paper:#ffffff;          /* white */
+      --card:#f8fafc;           /* very light gray-blue */
+      --line:#e5e7eb;           /* borders */
+      --success:#14b8a6;        /* teal success for badges */
+      --shadow:0 10px 30px rgba(17,24,39,.08);
+      --radius:18px;
+      --radius-lg:28px;
+      --container:1200px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:"Inter",system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial;
+      color:var(--ink);
+      background:linear-gradient(180deg,#fff 0,#fff 60%,#fff7ec 100%);
+      line-height:1.65;
+    }
+
+    /* ===== Global utility ===== */
+    .container{max-width:var(--container); margin:0 auto; padding:0 24px}
+    .grid{display:grid; gap:24px}
+    .btn{
+      appearance:none; border:0; border-radius:999px; padding:14px 22px;
+      background:var(--brand); color:#fff; font-weight:700; cursor:pointer;
+      transition:transform .15s ease, box-shadow .2s ease, background .2s ease;
+      box-shadow:0 12px 18px rgba(255,154,22,.25);
+      letter-spacing:.2px;
+    }
+    .btn:hover{transform:translateY(-2px); background:var(--brand-700)}
+    .btn.ghost{background:#fff; color:var(--ink); border:2px solid var(--line); box-shadow:none}
+    .chip{display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px; background:#fff; border:1px solid var(--line); font-weight:600}
+    .badge{display:inline-block; padding:4px 10px; border-radius:999px; background:var(--success); color:#fff; font-size:12px; font-weight:800; letter-spacing:.3px}
+    .card{background:var(--paper); border-radius:var(--radius); box-shadow:var(--shadow); padding:28px}
+    .subtle{color:var(--muted)}
+    .section{padding:96px 0}
+    .kicker{font-weight:800; text-transform:uppercase; letter-spacing:.18em; font-size:12px; color:var(--brand)}
+    .h1{font-size:56px; line-height:1.07; letter-spacing:-.02em; margin:10px 0 14px}
+    .h2{font-size:38px; line-height:1.15; letter-spacing:-.02em; margin:6px 0 14px}
+    .h3{font-size:22px; margin:0 0 8px; line-height:1.3}
+    .mono{font-variant-numeric:tabular-nums; font-feature-settings:"tnum" 1}
+    .list{display:grid; gap:14px; padding:0; margin:0; list-style:none}
+    .lead{font-size:18px; color:#334155}
+    .sep{height:1px; background:var(--line); margin:24px 0}
+
+    /* ===== Navigation ===== */
+    header{
+      position:sticky; top:0; inset-inline:0; z-index:50;
+      background:rgba(255,255,255,.82); backdrop-filter:saturate(1.2) blur(8px);
+      border-bottom:1px solid rgba(17,24,39,.06)
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between; gap:18px; height:72px
+    }
+    .brand{display:flex; align-items:center; gap:12px; font-weight:900; letter-spacing:.3px}
+    .brand-mark{
+      width:34px; height:34px; border-radius:10px; display:grid; place-items:center;
+      background:conic-gradient(from 220deg, #ffbd59, var(--brand), #ffd699);
+      box-shadow:0 8px 18px rgba(255,154,22,.35)
+    }
+    nav ul{display:flex; gap:20px; margin:0; padding:0; list-style:none}
+    nav a{
+      color:#0f172a; text-decoration:none; font-weight:600; padding:10px 12px; border-radius:10px;
+      transition:background .2s ease, color .2s ease
+    }
+    nav a:hover{background:#f1f5f9}
+    .nav-cta{display:flex; gap:10px; align-items:center}
+
+    /* ===== Hero ===== */
+    .hero{
+      position:relative; overflow:hidden; padding:120px 0 80px; background:#fff;
+    }
+    .hero::before{
+      content:""; position:absolute; inset:0;
+      background-image:
+        linear-gradient(90deg, rgba(255,154,22,.14), rgba(255,154,22,0)),
+        url("https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=2400&auto=format&fit=crop");
+      background-size:auto, cover;
+      background-position:center right;
+      opacity:.16; pointer-events:none;
+    }
+    .hero-wrap{display:grid; grid-template-columns:1.15fr .85fr; gap:42px; align-items:center}
+    .hero .panel{
+      background:linear-gradient(180deg,#fff, #fff8ee);
+      border:1px solid var(--line); border-radius:var(--radius-lg); padding:26px; box-shadow:var(--shadow)
+    }
+    .tick{display:flex; gap:10px; align-items:flex-start}
+    .tick svg{flex:0 0 22px}
+    .metrics{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:20px; margin-top:18px}
+    .metric{background:#fff; border:1px solid var(--line); border-radius:14px; padding:14px; text-align:center}
+    .metric strong{font-size:22px}
+
+    /* ===== Sections ===== */
+    .columns-3{grid-template-columns:repeat(3, minmax(0,1fr))}
+    .columns-2{grid-template-columns:repeat(2, minmax(0,1fr))}
+    .icon{
+      width:42px; height:42px; border-radius:10px; display:grid; place-items:center;
+      background:#fff4e5; color:#b45309; border:1px solid #fed7aa
+    }
+
+    /* ===== Timeline / Process ===== */
+    .timeline{position:relative; padding-left:22px}
+    .timeline::before{
+      content:""; position:absolute; left:9px; top:4px; bottom:4px; width:2px; background:linear-gradient(#ffd699, var(--brand))
+    }
+    .step{position:relative; padding-left:24px; margin-bottom:22px}
+    .bullet{
+      position:absolute; left:-2px; top:2px; width:18px; height:18px; border-radius:50%;
+      background:var(--brand); box-shadow:0 0 0 6px #fff, 0 2px 10px rgba(0,0,0,.12)
+    }
+
+    /* ===== Footer ===== */
+    footer{padding:26px 0 60px; border-top:1px solid var(--line); background:#fff}
+    .credits{display:flex; flex-wrap:wrap; align-items:center; gap:10px; color:var(--muted)}
+
+    /* ===== Modal ===== */
+    .modal{
+      position:fixed; inset:0; background:rgba(15,23,42,.48);
+      display:none; align-items:center; justify-content:center; padding:20px; z-index:100;
+    }
+    .modal.active{display:flex}
+    .modal-card{
+      width:min(700px, 92vw); background:#fff; border-radius:24px; box-shadow:var(--shadow); padding:28px 24px 24px
+    }
+    .modal-header{display:flex; align-items:center; justify-content:space-between; margin-bottom:10px}
+    .modal h3{margin:0}
+    .close{
+      background:transparent; border:0; font-size:22px; cursor:pointer; line-height:1; padding:8px; border-radius:10px
+    }
+    .close:hover{background:#f1f5f9}
+    form .row{display:grid; gap:14px; grid-template-columns:1fr 1fr}
+    label{font-size:14px; font-weight:700}
+    input, textarea, select{
+      width:100%; padding:12px 14px; border:1px solid var(--line); border-radius:12px; font:inherit; background:#fff
+    }
+    textarea{min-height:110px; resize:vertical}
+    .helper{font-size:12px; color:var(--muted)}
+    .success-icon{
+      width:54px; height:54px; border-radius:16px; display:grid; place-items:center;
+      background:#ecfeff; border:1px solid #99f6e4; color:#0d9488; margin-bottom:8px
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width:1000px){
+      .hero-wrap{grid-template-columns:1fr}
+      .columns-3{grid-template-columns:1fr}
+      .columns-2{grid-template-columns:1fr}
+      .metrics{grid-template-columns:repeat(3,1fr)}
+      .h1{font-size:44px}
+    }
+    @media (max-width:640px){
+      .nav-cta{display:none}
+      .metrics{grid-template-columns:repeat(2,1fr)}
+      form .row{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- =========================
+       NAVIGATION
+       ========================= -->
+  <header>
+    <div class="container nav">
+      <a href="#home" class="brand" aria-label="NEXT 1 CAPITAL homepage">
+        <span class="brand-mark" aria-hidden="true">
+          <!-- stylized N1 -->
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M5 18V6l8 12V6" stroke="#1f2937" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M17 18V6" stroke="#1f2937" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <span>NEXT 1 CAPITAL</span>
+      </a>
+
+      <nav aria-label="Primary">
+        <ul>
+          <li><a href="#about">Who We Are</a></li>
+          <li><a href="#services">What We Do</a></li>
+          <li><a href="#mission">Mission & Impact</a></li>
+          <li><a href="#process">How We Work</a></li>
+          <li><a href="#contact">Contacts</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-cta">
+        <span class="chip"><span class="badge">Miami</span> Alternative Investments</span>
+        <button class="btn" id="openContact1" aria-haspopup="dialog" aria-controls="contactModal">Get Started</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================
+       HERO — "Modern Alpha, Real Outcomes"
+       ========================= -->
+  <section class="hero" id="home" aria-label="Intro">
+    <div class="container hero-wrap">
+      <div>
+        <div class="kicker">Other Financial Investment Activities</div>
+        <h1 class="h1">Modern Alpha for Private Investors & Families</h1>
+        <p class="lead">
+          We originate and manage differentiated opportunities across private credit, income-producing real assets, and special situations,
+          translating disciplined analysis into durable, risk-aware returns.
+        </p>
+
+        <div class="grid columns-2" style="margin-top:22px">
+          <div class="panel">
+            <div class="tick">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true">
+                <path d="M20 7L9 18l-5-5" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <div>
+                <strong>Our analysis is your financial result.</strong>
+                <div class="subtle">We convert raw data into position sizing, risk budgets, and execution plans you can act on.</div>
+              </div>
+            </div>
+            <div class="sep"></div>
+            <div class="metrics" aria-label="Key stats">
+              
+              <div class="metric">
+                <div class="subtle">Already on board</div>
+                <strong class="mono">43</strong>
+              </div>
+              <div class="metric">
+                <div class="subtle">Target IRR</div>
+                <strong class="mono">12–18%</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="kicker">What You Can Expect</div>
+            <ul class="list">
+              <li class="tick">
+                <svg viewBox="0 0 24 24" width="22" height="22"><path d="M20 7L9 18l-5-5" stroke="#10b981" stroke-width="2" fill="none"/></svg>
+                Institutional diligence, boutique access, and transparent fees.
+              </li>
+              <li class="tick">
+                <svg viewBox="0 0 24 24" width="22" height="22"><path d="M20 7L9 18l-5-5" stroke="#10b981" stroke-width="2" fill="none"/></svg>
+                Structures designed to prioritize cash yield and downside control.
+              </li>
+              <li class="tick">
+                <svg viewBox="0 0 24 24" width="22" height="22"><path d="M20 7L9 18l-5-5" stroke="#10b981" stroke-width="2" fill="none"/></svg>
+                A partner who invests alongside you on every transaction.
+              </li>
+            </ul>
+            <div style="display:flex; gap:12px; margin-top:16px">
+              <button class="btn" id="openContact2" aria-haspopup="dialog" aria-controls="contactModal">Any questions?</button>
+              <a class="btn ghost" href="#services">Explore services</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Visual side card -->
+      <aside class="card" aria-label="Performance snapshot">
+        <div class="kicker">Performance Analysis</div>
+        <h3 class="h3">Signal-driven portfolio oversight</h3>
+        <p class="subtle">
+          We monitor factor drift, borrower health, and market microstructure to adjust exposure ahead of the curve.
+        </p>
+        <div class="sep"></div>
+        <div class="grid columns-2">
+          <div class="metric" aria-label="Downside deviation">
+            <div class="subtle">Downside Dev.</div>
+            <strong class="mono">4.2%</strong>
+          </div>
+          <div class="metric" aria-label="Realized DPI">
+            <div class="subtle">Realized DPI</div>
+            <strong class="mono">1.38×</strong>
+          </div>
+        </div>
+        <p class="helper" style="margin-top:10px">
+          Metrics shown for illustration; actual performance varies by vehicle and vintage.
+        </p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- =========================
+       ABOUT — "Who We Are"
+       ========================= -->
+  <section class="section" id="about" aria-label="About NEXT 1 CAPITAL">
+    <div class="container">
+      <div class="kicker">Who We Are</div>
+      <h2 class="h2">A research-led investment firm headquartered in Miami</h2>
+      <p class="lead">
+        NEXT 1 CAPITAL, LLC originates, underwrites, and manages niche opportunities across the U.S. private markets,
+        focusing on resilient income and asset-backed strategies. Our team blends sell-side credit, operations,
+        and data science experience to evaluate deals beyond the teaser—validating counterparties, cash flows,
+        legal terms, and operational risks before capital is at stake. We build alignment by co-investing and by
+        structuring fees around realized outcomes, not just assets gathered. Operating from Miami, we serve high-net-worth
+        investors, family offices, and independent RIAs seeking diversification outside public equity beta.
+      </p>
+      <div class="grid columns-3" style="margin-top:28px">
+        <div class="card">
+          <div class="icon" aria-hidden="true">📊</div>
+          <h3 class="h3">Evidence over impulse</h3>
+          <p class="subtle">Every mandate begins with a falsifiable thesis, a precise risk budget, and decision rules that remove emotion from allocation.</p>
+        </div>
+        <div class="card">
+          <div class="icon" aria-hidden="true">🧩</div>
+          <h3 class="h3">Aligned incentives</h3>
+          <p class="subtle">We invest alongside clients and keep our economics simple. If the vehicle underperforms its hurdle, we take less.</p>
+        </div>
+        <div class="card">
+          <div class="icon" aria-hidden="true">🔒</div>
+          <h3 class="h3">Downside first</h3>
+          <p class="subtle">Structures emphasize collateral, coverage, covenants, and control—because protecting principal is the first return.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================
+       SERVICES — "What We Do"
+       ========================= -->
+  <section class="section" id="services" aria-label="Services">
+    <div class="container">
+      <div class="kicker">What We Do</div>
+      <h2 class="h2">Purpose-built solutions across private markets</h2>
+
+      <div class="grid columns-3" style="margin-top:10px">
+        <!-- Service 1 -->
+        <article class="card">
+          <div class="icon" aria-hidden="true">💼</div>
+          <h3 class="h3">Private Credit — Cash-Yielding Notes</h3>
+          <p>
+            We originate senior secured notes to lower-middle-market operators with durable cash flows and tangible collateral.
+            Coverage ratios, escrow mechanics, and independent administration reduce performance slippage.
+            The result is predictable monthly income with controlled duration and covenants that actually bite.
+          </p>
+        </article>
+
+        <!-- Service 2 -->
+        <article class="card">
+          <div class="icon" aria-hidden="true">🏗️</div>
+          <h3 class="h3">Income Real Assets</h3>
+          <p>
+            We focus on essential-use assets—logistics, outdoor storage, and infrastructure adjacencies—where capex is disciplined
+            and tenants renew. Our underwriting pairs site-level data (ingress/egress, zoning, truck counts) with operator capability
+            to underwrite NOI that persists through cycles.
+          </p>
+        </article>
+
+        <!-- Service 3 -->
+        <article class="card">
+          <div class="icon" aria-hidden="true">🧠</div>
+          <h3 class="h3">Special Situations & Secondaries</h3>
+          <p>
+            When time, complexity, or capital structure noise creates a discount, we step in.
+            We evaluate legal levers, vendor dependencies, and customer concentration to separate solvable from terminal.
+            Execution plans include milestone-based capital and operational oversight until stabilization.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================
+       EXTRA BLOCK (4) — "Mission & Impact"
+       ========================= -->
+  <section class="section" id="mission" aria-label="Mission and Objectives">
+    <div class="container">
+      <div class="kicker">Mission & Impact</div>
+      <h2 class="h2">Why we exist—and what we’re building toward</h2>
+
+      <div class="grid columns-3" style="margin-top:14px">
+        <div class="card">
+          <h3 class="h3">Mission</h3>
+          <p>
+            Empower private investors with institutional-grade access, analysis, and alignment—so their capital compounds with clarity
+            and without unnecessary complexity.
+          </p>
+          <p class="helper">We keep the playbook simple: find cash, secure cash, grow cash.</p>
+        </div>
+        <div class="card">
+          <h3 class="h3">Objectives</h3>
+          <ul class="list">
+            <li>Deliver double-digit net returns with volatility lower than public markets.</li>
+            <li>Maintain loss ratios below 1% across vehicles and vintages.</li>
+            <li>Standardize reporting so families and RIAs can plug insights into their workflows.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 class="h3">Impact</h3>
+          <p>
+            Capital placed through our vehicles helps expand essential logistics, fund jobs at real operators,
+            and professionalize small-business finance—all while keeping capital accountable to covenants.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================
+       EXTRA BLOCK (5) — "How We Work / Our Process"
+       ========================= -->
+  <section class="section" id="process" aria-label="Our Process">
+    <div class="container">
+      <div class="kicker">How We Work</div>
+      <h2 class="h2">A clear, three-step path from thesis to cash flow</h2>
+
+      <div class="grid columns-3" style="margin-top:20px">
+        <div class="card">
+          <div class="icon" aria-hidden="true">🔎</div>
+          <h3 class="h3">1) Source & Screen</h3>
+          <p>
+            We cast a wide net through operator networks, brokers, and data scrapes. Each lead faces a quick-kill checklist:
+            cash coverage, sponsor capability, legal posture, and business model resiliency.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="icon" aria-hidden="true">📐</div>
+          <h3 class="h3">2) Underwrite & Structure</h3>
+          <p>
+            Deals that survive go into deep diligence—site walks, calls, bank statements, lien searches.
+            We then structure for downside: first-lien claim, reporting cadence, escrow/lockbox, and board/observer rights where needed.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="icon" aria-hidden="true">📈</div>
+          <h3 class="h3">3) Monitor & Improve</h3>
+          <p>
+            Post-close, we monitor covenants and cash daily/weekly depending on risk.
+            When gaps appear, we act—tighten controls, coach operators, or move to remedies before loss compounds.
+          </p>
+        </div>
+      </div>
+
+      <!-- condensed timeline variant -->
+      <div class="card" style="margin-top:22px">
+        <div class="timeline" aria-label="Detailed process timeline">
+          <div class="step">
+            <span class="bullet" aria-hidden="true"></span>
+            <strong>Origination engine:</strong> proprietary CRM, referral scorecards, and a “no-heroics” filter.
+          </div>
+          <div class="step">
+            <span class="bullet" aria-hidden="true"></span>
+            <strong>IC memo:</strong> base-case/ bear-case, covenants that matter, and the exact triggers that force action.
+          </div>
+          <div class="step">
+            <span class="bullet" aria-hidden="true"></span>
+            <strong>Owner’s mindset:</strong> we show up like partners, not passive paper.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================
+       WHY CHOOSE US (Advantages)
+       ========================= -->
+  <section class="section" aria-label="Why investors choose us">
+    <div class="container">
+      <div class="kicker">Our Edge</div>
+      <h2 class="h2">Why investors choose NEXT 1 CAPITAL</h2>
+
+      <div class="grid columns-3" style="margin-top:16px">
+        <div class="card">
+          <h3 class="h3">Operator-level diligence</h3>
+          <p>
+            We verify revenue with third-party data, pull UCCs, test operational bottlenecks,
+            and interview vendors and customers—not just management. The picture is real, not rehearsed.
+          </p>
+        </div>
+        <div class="card">
+          <h3 class="h3">Structures that protect</h3>
+          <p>
+            Controls include lockboxes, inventory audits, and step-in rights. Terms are drafted for use,
+            not decoration; triggers compel action before capital is harmed.
+          </p>
+        </div>
+        <div class="card">
+          <h3 class="h3">Aligned with your outcomes</h3>
+          <p>
+            We co-invest, cap fixed fees, and scale carry after hurdles—so we win when you do.
+            We publish look-through reporting you can share with your CPA or CIO without translation.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================
+       CTA STRIP
+       ========================= -->
+  <section class="section" style="padding:64px 0; background:linear-gradient(90deg,#fff7ec, #fff); border-top:1px solid var(--line); border-bottom:1px solid var(--line)">
+    <div class="container grid columns-2" style="align-items:center">
+      <div>
+        <div class="kicker">Ready to deploy with confidence?</div>
+        <h2 class="h2">Let’s align capital with cash flow.</h2>
+        <p class="subtle">Share your objectives; we’ll suggest the right vehicle or build a bespoke sleeve.</p>
+      </div>
+      <div style="display:flex; gap:12px; justify-content:flex-end; flex-wrap:wrap">
+        <a href="#services" class="btn ghost">Review offerings</a>
+        <button class="btn" id="openContact3" aria-haspopup="dialog" aria-controls="contactModal">Open contact form</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================
+       CONTACTS
+       ========================= -->
+  <section class="section" id="contact" aria-label="Contacts">
+    <div class="container">
+      <div class="kicker">Contact</div>
+      <h2 class="h2">Where to find us</h2>
+      <div class="grid columns-2" style="margin-top:12px">
+        <div class="card">
+          <h3 class="h3">Office</h3>
+          <p class="subtle">11077 Biscayne Blvd, 33161 Miami</p>
+          <div class="sep"></div>
+          <h3 class="h3">Email</h3>
+          <p><a href="mailto:sergio@next1capital.org">sergio@next1capital.org</a></p>
+        </div>
+        <div class="card">
+          <h3 class="h3">Let’s talk terms</h3>
+          <p class="subtle">Prefer a quick intro? Open the form and drop a note—two minutes, tops.</p>
+          <button class="btn" id="openContact4" aria-haspopup="dialog" aria-controls="contactModal">Start a conversation</button>
+          <p class="helper" style="margin-top:10px">
+            Phrases you can use: “Looking for income,” “Curious about private credit,” “Interested in co-invest,” “Need a second opinion.”
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================
+       FOOTER
+       ========================= -->
+  <footer aria-label="Footer">
+    <div class="container">
+      <div class="credits">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <strong>NEXT 1 CAPITAL, LLC</strong>
+        <span>•</span>
+        <span>Other Financial Investment Activities — Finance & Insurance</span>
+        <span>•</span>
+        <span>Miami, Florida</span>
+      </div>
+      <p class="helper">This site provides general information and is not an offer to sell or a solicitation to buy any security. Offers are made only by private offering documents.</p>
+    </div>
+  </footer>
+
+  <!-- =========================
+       CONTACT MODAL (with confirmation modal)
+       ========================= -->
+  <div class="modal" id="contactModal" role="dialog" aria-modal="true" aria-labelledby="contactTitle" aria-describedby="contactDesc">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div>
+          <div class="kicker">Get in touch</div>
+          <h3 class="h3" id="contactTitle">Tell us where capital should go next</h3>
+          <p id="contactDesc" class="helper">
+            Use natural language—examples: “Seeking 10–12% net yield,” “Evaluate this deal,” or “Can you review my structure?”
+          </p>
+        </div>
+        <button class="close" aria-label="Close contact form" data-close>&times;</button>
+      </div>
+
+      <form id="leadForm" novalidate>
+        <div class="row">
+          <div>
+            <label for="name">Your name</label>
+            <input id="name" name="name" placeholder="First and last name" required />
+            <div class="helper">Tell us how to address you.</div>
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="you@example.com" required />
+            <div class="helper">We’ll follow up within one business day.</div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top:10px">
+          <div>
+            <label for="objective">Primary objective</label>
+            <select id="objective" name="objective" required>
+              <option value="">Select an objective</option>
+              <option>Income — monthly cash yield</option>
+              <option>Diversification — low correlation</option>
+              <option>Co-invest — deal by deal</option>
+              <option>Second opinion — review a memo</option>
+            </select>
+          </div>
+          
+        </div>
+
+        <div style="margin-top:10px">
+          <label for="message">What should we know?</label>
+          <textarea id="message" name="message" placeholder="Add context, timeline, and constraints (tax, liquidity, geography)…" required></textarea>
+        </div>
+
+        <div class="sep"></div>
+
+        <div style="display:flex; gap:12px; justify-content:flex-end">
+          <button class="btn ghost" type="button" data-close>Cancel</button>
+          <button class="btn" type="submit">Send message</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Confirmation modal -->
+  <div class="modal" id="thanksModal" role="dialog" aria-modal="true" aria-labelledby="thanksTitle" aria-describedby="thanksDesc">
+    <div class="modal-card" style="max-width:560px">
+      <div class="modal-header">
+        <div>
+          <div class="success-icon" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+              <path d="M20 7L9 18l-5-5" stroke="#0d9488" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3 class="h3" id="thanksTitle">Message sent — we’re on it</h3>
+          <p id="thanksDesc" class="helper">
+            Thanks for reaching out. A member of our team will respond from
+            <strong>sergio@next1capital.org</strong> with next steps and a calendar link.
+          </p>
+        </div>
+        <button class="close" aria-label="Close confirmation" data-close>&times;</button>
+      </div>
+      <div style="display:flex; gap:10px; justify-content:flex-end">
+        <button class="btn" data-close>Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================
+       Scripts — smooth anchors, modal logic, simple validation
+       ========================= -->
+  <script>
+    // Smooth scroll enhancement for all anchor links within the page
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        const id = a.getAttribute('href').substring(1);
+        const el = document.getElementById(id);
+        if(el){
+          e.preventDefault();
+          const y = el.getBoundingClientRect().top + window.pageYOffset - 70;
+          window.scrollTo({top:y, behavior:'smooth'});
+          // add a subtle focus halo after scroll for accessibility
+          setTimeout(()=>{el.setAttribute('tabindex','-1'); el.focus({preventScroll:true});}, 400);
+        }
+      });
+    });
+
+    // Modal helpers
+    const modals = {
+      contact: document.getElementById('contactModal'),
+      thanks: document.getElementById('thanksModal')
+    };
+    const openers = [
+      document.getElementById('openContact1'),
+      document.getElementById('openContact2'),
+      document.getElementById('openContact3'),
+      document.getElementById('openContact4')
+    ].filter(Boolean);
+
+    openers.forEach(btn=>{
+      btn.addEventListener('click', ()=> openModal(modals.contact));
+    });
+
+    document.querySelectorAll('[data-close]').forEach(btn=>{
+      btn.addEventListener('click', ()=> closeAll());
+    });
+
+    // close on background click / ESC
+    Object.values(modals).forEach(m=>{
+      m.addEventListener('click', e=>{
+        if(e.target === m) closeAll();
+      });
+    });
+    document.addEventListener('keydown', e=>{
+      if(e.key === 'Escape') closeAll();
+    });
+
+    function openModal(modal){
+      modal.classList.add('active');
+      const firstInput = modal.querySelector('input, textarea, select, button');
+      if(firstInput) firstInput.focus();
+    }
+    function closeAll(){
+      Object.values(modals).forEach(m=> m.classList.remove('active'));
+    }
+
+    // Simple form validation and "submission"
+    const form = document.getElementById('leadForm');
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+
+      // Minimal client validation
+      const required = ['name','email','objective','message'];
+      let valid = true;
+
+      required.forEach(id=>{
+        const el = document.getElementById(id);
+        if(!el.value || (id==='email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value))){
+          el.style.borderColor = '#ef4444';
+          el.setAttribute('aria-invalid','true');
+          valid = false;
+        } else {
+          el.style.borderColor = 'var(--line)';
+          el.removeAttribute('aria-invalid');
+        }
+      });
+
+      if(!valid){
+        // gentle nudge
+        alert('Please complete the highlighted fields before sending.');
+        return;
+      }
+
+      // Simulate sending, then show thank-you modal
+      closeAll();
+      setTimeout(()=> openModal(modals.thanks), 200);
+
+      // Reset form for the next message
+      form.reset();
+    });
+  </script>
+</body>
+</html>
